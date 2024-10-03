@@ -1,4 +1,4 @@
-build/main/Sb_cut.o: src/cpp/main/Sb_cut.cpp \
+build/main/test.o: src/cpp/main/test.cpp \
  E:\opencv_for_MinGW\install\include/opencv2/opencv.hpp \
  E:\opencv_for_MinGW\install\include/opencv2/opencv_modules.hpp \
  E:\opencv_for_MinGW\install\include/opencv2/core.hpp \

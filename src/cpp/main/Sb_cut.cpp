@@ -7,6 +7,7 @@
 #include <chrono>
 
 #include "Setting.h" 
+#include "Utils.h"
 
 using namespace std;
 using namespace cv;
@@ -15,8 +16,10 @@ string data_path = root_data_path;
 string in_folder = data_path + "in/";
 string out_folder = data_path + "out/sub/";
 string log_folder = data_path + "out/log/";
-string in_file = in_folder + "cr2.png";
-string out_file = log_folder + "cr2_out.png";
+
+string in_file = in_folder + "cr1.png";
+string log_file = log_folder + "Sb_cut_log.txt";
+
 cv::Mat img;
 
 const double WIDTH = 1280.0;
@@ -34,20 +37,24 @@ int HAVING_COLOR(){
 }
 
 const int THRESHOLD = 3;
+const int BACKGROUND_VAR = 2500;
+
 
 int main(){
-
     auto time_start = chrono::system_clock::now();
+
+    // Delete old ships
+    {
+        string cmd = "powershell.exe Remove-Item -Path \"" + out_folder + "\\*.png\" -Force";
+        system(cmd.c_str());
+    }
 
     img = cv::imread(in_file, cv::IMREAD_COLOR);
     if(img.empty()){
         cout << "Cannot read image: " << in_file << endl;
         return -1;
     }
-    // cv::namedWindow("Input Image", cv::WINDOW_AUTOSIZE);
-    // cv::imshow("Input Image", img);
-    // cv::waitKey(0);
-
+    
     // 算每列均值
     vector<Vec3d> avg_colors_col(img.cols, Vec3d(0,0,0));
     for(int j = 0; j < img.cols; j++){
@@ -284,16 +291,28 @@ int main(){
         for(auto itr_col = ship_pos_col.begin(); itr_col != ship_pos_col.end(); itr_col++){
             Rect rect(itr_col->first, itr_row->first, itr_col->second, itr_row->second);
             Mat sub_img = img(rect);
+
+            //最后一行做空白检测
+            auto next_itr_row = itr_row;
+            next_itr_row++;
+            if(next_itr_row == ship_pos_row.end()){
+                Vec3d avg_color(0,0,0);
+                Vec3d var_color(0,0,0);
+                meanStdDev(sub_img, avg_color, var_color);
+                double var = var_color[0] * var_color[0] + var_color[1] * var_color[1] + var_color[2] * var_color[2];
+                var /= 3;
+
+                if(var < BACKGROUND_VAR){//一个是空白，剩下的全是空白
+                    break;
+                }
+            }            
+
             cv::imwrite(out_folder + to_string(conter) + ".png", sub_img);
             conter++;
         }
     }
 
-    auto time_end = chrono::system_clock::now();
-    std::chrono::duration<double, std::milli> duration = time_end - time_start;
-    cout << "Time used: " << duration.count() << " ms" << endl;
 
-    exit(0);
 
     //前后景二值化
     for(int j = 0; j < img.cols; j++){
@@ -333,32 +352,17 @@ int main(){
         }
     }   
 
-    cv::namedWindow("Output Image", cv::WINDOW_AUTOSIZE);
-    cv::imshow("Output Image", img);
-    cv::waitKey(0);
+    auto time_end = chrono::system_clock::now();
+    std::chrono::duration<double, std::milli> duration = time_end - time_start;
+    cout << "Time used: " << duration.count() << " ms" << endl;
 
-    {//save output image
-        cv::imwrite(out_file, img);
-    }
+    ofstream log(log_file , ios::app);
+    log << "Timestamp: " << get_timestamp() << endl;
+    log << "Input file: " << in_file << endl;
+    log << "Ship count: " << conter << endl;
+    log << "Time used: " << duration.count() << " ms" << endl;
+    log << "-" << endl;
+    log.close();
 
-    {//test
-        string var_col_log = log_folder + "var_col.txt";
-        ofstream ofs(var_col_log.c_str());
-        for(int j = 0; j < var_col.size(); j++){
-            ofs << j << " " << var_col[j] << endl;
-        }
-        ofs.close();
-
-        string var_row_log = log_folder + "var_row.txt";    
-        ofs.open(var_row_log.c_str());
-        for(int i = 0; i < var_row.size(); i++){
-            ofs << i << " " << var_row[i] ;
-            if(var_row[i] >= stresh_var_row){
-                ofs << "[1]";
-            }
-            ofs << endl;
-        }
-        ofs.close();
-    }
     return 0;
 }

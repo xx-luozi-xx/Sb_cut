@@ -1,0 +1,3 @@
+Timestamp: 2024-10-03 12:30:44
+Front avg var: 4866.74
+Back avg var: 30.5988
