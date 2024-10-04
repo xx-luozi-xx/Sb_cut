@@ -1,24 +1,53 @@
+/**
+ * @file Sb_cut.cpp
+ * @author xx-luozi-xx
+ * @brief 吧长截图里的船切单独截出并输出
+ *        输入：一张图片
+ *        输出：船的图片
+ *        基本思想：
+ *        对每一列和每一行单独求方差，方差较小的行或者列认为是背景
+ *        长截图中列比较长，所以较为准确，找出列背景后求列背景的均值
+ *        求行均值时混入一定的背景色再求方差增加识别率。
+ * 
+ *        找具体船位置时，以三个(不同分辨率动态调节)连续前景像素为船的位置,
+ *        强行设置一段(通过比例预先设定好的)前景区间，随后寻找三个(同上)连续背景像素为船的结束。
+ * 
+ *        最后通过所有船的长度和宽度求均值，重新调整宽度和位置使得输出截图大小一致。
+ * 
+ *        输出时在最后一行船特判这是否是船或者背景。
+ * 
+ *        输入输出和日志路径均在config.json中配置。
+ * 
+ * @version 0.1
+ * @date 2024-10-04
+ * 
+ * @copyright Copyright (c) 2024
+ * 
+ */
+
 #include <fstream>
 #include <iostream>
 #include <string>
 #include <vector>
+
 #include <opencv2/opencv.hpp>
+#include <nlohmann/json.hpp>
 
-#include <chrono>
+#include <chrono>   // for high_resolution_clock
 
-#include "Setting.h" 
-#include "Utils.h"
+#include "Utils.h"  // for get_timestamp()
 
+using json = nlohmann::json;
 using namespace std;
 using namespace cv;
 
-string data_path = root_data_path;
-string in_folder = data_path + "in/";
-string out_folder = data_path + "out/sub/";
-string log_folder = data_path + "out/log/";
+string root_folder = "./";
 
-string in_file = in_folder + "cr1.png";
-string log_file = log_folder + "Sb_cut_log.txt";
+string in_file;
+string in_folder;
+string out_folder;
+string log_folder;
+string log_file = "Sb_cut_log.txt";
 
 cv::Mat img;
 
@@ -39,8 +68,19 @@ int HAVING_COLOR(){
 const int THRESHOLD = 3;
 const int BACKGROUND_VAR = 2500;
 
+bool load_config();
 
-int main(){
+int main(int argc, char** argv){
+    // 读取命令行参数 为程序所在路径
+    if(argc > 1){
+        root_folder = argv[1];
+    }
+
+    if(load_config() == false){
+        std::cout << "Cannot load config file." << endl;
+        return -1;
+    }
+
     auto time_start = chrono::system_clock::now();
 
     // Delete old ships
@@ -49,9 +89,9 @@ int main(){
         system(cmd.c_str());
     }
 
-    img = cv::imread(in_file, cv::IMREAD_COLOR);
+    img = cv::imread(in_folder+in_file, cv::IMREAD_COLOR);
     if(img.empty()){
-        cout << "Cannot read image: " << in_file << endl;
+        cout << "Cannot read image: " << in_folder+in_file << endl;
         return -1;
     }
     
@@ -284,6 +324,32 @@ int main(){
         
     }
 
+    //统一宽度大小矫正
+    double avg_width = 0;
+    for(auto itr_col = ship_pos_col.begin(); itr_col != ship_pos_col.end(); itr_col++){
+        avg_width += itr_col->second;
+    }
+    avg_width /= ship_pos_col.size();
+
+    int new_width = ceil(avg_width);
+    for(auto itr_col = ship_pos_col.begin(); itr_col != ship_pos_col.end(); itr_col++){
+        itr_col->first += (itr_col->second - new_width)/2;
+        itr_col->second = new_width;
+    }
+
+    //统一高度大小矫正
+    double avg_height = 0;
+    for(auto itr_row = ship_pos_row.begin(); itr_row != ship_pos_row.end(); itr_row++){
+        avg_height += itr_row->second;
+    }
+    avg_height /= ship_pos_row.size();
+
+    int new_height = ceil(avg_height);
+    for(auto itr_row = ship_pos_row.begin(); itr_row != ship_pos_row.end(); itr_row++){
+        itr_row->first += (itr_row->second - new_height)/2;
+        itr_row->second = new_height;
+    }
+
 
     //裁剪
     int conter = 0;
@@ -312,57 +378,37 @@ int main(){
         }
     }
 
-
-
-    //前后景二值化
-    for(int j = 0; j < img.cols; j++){
-        if(var_col[j] < stresh_var_col){
-            var_col[j] = 0;
-        }else{
-            var_col[j] = 1e9;
-        }
-    }
-    for(int i = 0; i < img.rows; i++){
-        if(var_row[i] < stresh_var_row){
-            var_row[i] = 0;
-        }else{
-            var_row[i] = 1e9;
-        }
-    }  
-
-
-
-    for(int j = 0; j < img.cols; j++){
-        if(var_col[j] < stresh_var_col){
-            for(int i = 0; i < img.rows; i++){
-                img.at<cv::Vec3b>(i,j)[0] = 0;
-                img.at<cv::Vec3b>(i,j)[1] = 0;
-                img.at<cv::Vec3b>(i,j)[2] = 0;
-            }
-        }
-    }
-
-    for(int i = 0; i < img.rows; i++){
-        if(var_row[i] < stresh_var_row){
-            for(int j = 0; j < img.cols; j++){
-                img.at<cv::Vec3b>(i,j)[0] = 0;
-                img.at<cv::Vec3b>(i,j)[1] = 0;
-                img.at<cv::Vec3b>(i,j)[2] = 0;
-            }
-        }
-    }   
-
     auto time_end = chrono::system_clock::now();
     std::chrono::duration<double, std::milli> duration = time_end - time_start;
     cout << "Time used: " << duration.count() << " ms" << endl;
 
-    ofstream log(log_file , ios::app);
+    ofstream log(log_folder + log_file , ios::app);
     log << "Timestamp: " << get_timestamp() << endl;
-    log << "Input file: " << in_file << endl;
+    log << "Input file: " << in_folder + in_file << endl;
     log << "Ship count: " << conter << endl;
     log << "Time used: " << duration.count() << " ms" << endl;
     log << "-" << endl;
     log.close();
 
     return 0;
+}
+
+
+bool load_config(){
+    json config_json;
+    ifstream config_file(root_folder+"config/config.json");
+    if(config_file.is_open()){
+        config_file >> config_json;
+        config_file.close();
+    }else{
+        cout << "Failed to load config file." << endl;
+        return false;
+    }
+
+    in_folder = config_json["input_folder"];
+    in_file = config_json["input_file"];
+    out_folder = config_json["output_folder"];
+    log_folder = config_json["log_folder"];
+    
+    return true;
 }

@@ -111,7 +111,52 @@ build/main/Sb_cut.o: src/cpp/main/Sb_cut.cpp \
  E:\opencv_for_MinGW\install\include/opencv2/video.hpp \
  E:\opencv_for_MinGW\install\include/opencv2/video/tracking.hpp \
  E:\opencv_for_MinGW\install\include/opencv2/video/background_segm.hpp \
- src/h/Setting.h src/h/Utils.h
+ E:\nlohmann_json\install\include/nlohmann/json.hpp \
+ E:\nlohmann_json\install\include/nlohmann/adl_serializer.hpp \
+ E:\nlohmann_json\install\include/nlohmann/detail/abi_macros.hpp \
+ E:\nlohmann_json\install\include/nlohmann/detail/conversions/from_json.hpp \
+ E:\nlohmann_json\install\include/nlohmann/detail/exceptions.hpp \
+ E:\nlohmann_json\install\include/nlohmann/detail/value_t.hpp \
+ E:\nlohmann_json\install\include/nlohmann/detail/macro_scope.hpp \
+ E:\nlohmann_json\install\include/nlohmann/detail/meta/detected.hpp \
+ E:\nlohmann_json\install\include/nlohmann/detail/meta/void_t.hpp \
+ E:\nlohmann_json\install\include/nlohmann/thirdparty/hedley/hedley.hpp \
+ E:\nlohmann_json\install\include/nlohmann/detail/string_escape.hpp \
+ E:\nlohmann_json\install\include/nlohmann/detail/input/position_t.hpp \
+ E:\nlohmann_json\install\include/nlohmann/detail/meta/cpp_future.hpp \
+ E:\nlohmann_json\install\include/nlohmann/detail/meta/type_traits.hpp \
+ E:\nlohmann_json\install\include/nlohmann/detail/iterators/iterator_traits.hpp \
+ E:\nlohmann_json\install\include/nlohmann/detail/meta/call_std/begin.hpp \
+ E:\nlohmann_json\install\include/nlohmann/detail/meta/call_std/end.hpp \
+ E:\nlohmann_json\install\include/nlohmann/json_fwd.hpp \
+ E:\nlohmann_json\install\include/nlohmann/detail/string_concat.hpp \
+ E:\nlohmann_json\install\include/nlohmann/detail/meta/identity_tag.hpp \
+ E:\nlohmann_json\install\include/nlohmann/detail/meta/std_fs.hpp \
+ E:\nlohmann_json\install\include/nlohmann/detail/conversions/to_json.hpp \
+ E:\nlohmann_json\install\include/nlohmann/detail/iterators/iteration_proxy.hpp \
+ E:\nlohmann_json\install\include/nlohmann/byte_container_with_subtype.hpp \
+ E:\nlohmann_json\install\include/nlohmann/detail/hash.hpp \
+ E:\nlohmann_json\install\include/nlohmann/detail/input/binary_reader.hpp \
+ E:\nlohmann_json\install\include/nlohmann/detail/input/input_adapters.hpp \
+ E:\nlohmann_json\install\include/nlohmann/detail/input/json_sax.hpp \
+ E:\nlohmann_json\install\include/nlohmann/detail/input/lexer.hpp \
+ E:\nlohmann_json\install\include/nlohmann/detail/meta/is_sax.hpp \
+ E:\nlohmann_json\install\include/nlohmann/detail/input/parser.hpp \
+ E:\nlohmann_json\install\include/nlohmann/detail/iterators/internal_iterator.hpp \
+ E:\nlohmann_json\install\include/nlohmann/detail/iterators/primitive_iterator.hpp \
+ E:\nlohmann_json\install\include/nlohmann/detail/iterators/iter_impl.hpp \
+ E:\nlohmann_json\install\include/nlohmann/detail/iterators/json_reverse_iterator.hpp \
+ E:\nlohmann_json\install\include/nlohmann/detail/json_custom_base_class.hpp \
+ E:\nlohmann_json\install\include/nlohmann/detail/json_pointer.hpp \
+ E:\nlohmann_json\install\include/nlohmann/detail/json_ref.hpp \
+ E:\nlohmann_json\install\include/nlohmann/detail/output/binary_writer.hpp \
+ E:\nlohmann_json\install\include/nlohmann/detail/output/output_adapters.hpp \
+ E:\nlohmann_json\install\include/nlohmann/detail/output/serializer.hpp \
+ E:\nlohmann_json\install\include/nlohmann/detail/conversions/to_chars.hpp \
+ E:\nlohmann_json\install\include/nlohmann/ordered_map.hpp \
+ E:\nlohmann_json\install\include/nlohmann/detail/macro_unscope.hpp \
+ E:\nlohmann_json\install\include/nlohmann/thirdparty/hedley/hedley_undef.hpp \
+ src/h/Utils.h
 
 E:\opencv_for_MinGW\install\include/opencv2/opencv.hpp:
 
@@ -337,6 +382,94 @@ E:\opencv_for_MinGW\install\include/opencv2/video/tracking.hpp:
 
 E:\opencv_for_MinGW\install\include/opencv2/video/background_segm.hpp:
 
-src/h/Setting.h:
+E:\nlohmann_json\install\include/nlohmann/json.hpp:
+
+E:\nlohmann_json\install\include/nlohmann/adl_serializer.hpp:
+
+E:\nlohmann_json\install\include/nlohmann/detail/abi_macros.hpp:
+
+E:\nlohmann_json\install\include/nlohmann/detail/conversions/from_json.hpp:
+
+E:\nlohmann_json\install\include/nlohmann/detail/exceptions.hpp:
+
+E:\nlohmann_json\install\include/nlohmann/detail/value_t.hpp:
+
+E:\nlohmann_json\install\include/nlohmann/detail/macro_scope.hpp:
+
+E:\nlohmann_json\install\include/nlohmann/detail/meta/detected.hpp:
+
+E:\nlohmann_json\install\include/nlohmann/detail/meta/void_t.hpp:
+
+E:\nlohmann_json\install\include/nlohmann/thirdparty/hedley/hedley.hpp:
+
+E:\nlohmann_json\install\include/nlohmann/detail/string_escape.hpp:
+
+E:\nlohmann_json\install\include/nlohmann/detail/input/position_t.hpp:
+
+E:\nlohmann_json\install\include/nlohmann/detail/meta/cpp_future.hpp:
+
+E:\nlohmann_json\install\include/nlohmann/detail/meta/type_traits.hpp:
+
+E:\nlohmann_json\install\include/nlohmann/detail/iterators/iterator_traits.hpp:
+
+E:\nlohmann_json\install\include/nlohmann/detail/meta/call_std/begin.hpp:
+
+E:\nlohmann_json\install\include/nlohmann/detail/meta/call_std/end.hpp:
+
+E:\nlohmann_json\install\include/nlohmann/json_fwd.hpp:
+
+E:\nlohmann_json\install\include/nlohmann/detail/string_concat.hpp:
+
+E:\nlohmann_json\install\include/nlohmann/detail/meta/identity_tag.hpp:
+
+E:\nlohmann_json\install\include/nlohmann/detail/meta/std_fs.hpp:
+
+E:\nlohmann_json\install\include/nlohmann/detail/conversions/to_json.hpp:
+
+E:\nlohmann_json\install\include/nlohmann/detail/iterators/iteration_proxy.hpp:
+
+E:\nlohmann_json\install\include/nlohmann/byte_container_with_subtype.hpp:
+
+E:\nlohmann_json\install\include/nlohmann/detail/hash.hpp:
+
+E:\nlohmann_json\install\include/nlohmann/detail/input/binary_reader.hpp:
+
+E:\nlohmann_json\install\include/nlohmann/detail/input/input_adapters.hpp:
+
+E:\nlohmann_json\install\include/nlohmann/detail/input/json_sax.hpp:
+
+E:\nlohmann_json\install\include/nlohmann/detail/input/lexer.hpp:
+
+E:\nlohmann_json\install\include/nlohmann/detail/meta/is_sax.hpp:
+
+E:\nlohmann_json\install\include/nlohmann/detail/input/parser.hpp:
+
+E:\nlohmann_json\install\include/nlohmann/detail/iterators/internal_iterator.hpp:
+
+E:\nlohmann_json\install\include/nlohmann/detail/iterators/primitive_iterator.hpp:
+
+E:\nlohmann_json\install\include/nlohmann/detail/iterators/iter_impl.hpp:
+
+E:\nlohmann_json\install\include/nlohmann/detail/iterators/json_reverse_iterator.hpp:
+
+E:\nlohmann_json\install\include/nlohmann/detail/json_custom_base_class.hpp:
+
+E:\nlohmann_json\install\include/nlohmann/detail/json_pointer.hpp:
+
+E:\nlohmann_json\install\include/nlohmann/detail/json_ref.hpp:
+
+E:\nlohmann_json\install\include/nlohmann/detail/output/binary_writer.hpp:
+
+E:\nlohmann_json\install\include/nlohmann/detail/output/output_adapters.hpp:
+
+E:\nlohmann_json\install\include/nlohmann/detail/output/serializer.hpp:
+
+E:\nlohmann_json\install\include/nlohmann/detail/conversions/to_chars.hpp:
+
+E:\nlohmann_json\install\include/nlohmann/ordered_map.hpp:
+
+E:\nlohmann_json\install\include/nlohmann/detail/macro_unscope.hpp:
+
+E:\nlohmann_json\install\include/nlohmann/thirdparty/hedley/hedley_undef.hpp:
 
 src/h/Utils.h:

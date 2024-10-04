@@ -17,6 +17,8 @@ CV_LIB_DIR = "E:\opencv_for_MinGW\install\x64\mingw\lib"
 # opencv库文件
 CV_LIB_FILE = opencv_world490
 
+# nlohmann/json include目录
+NLOHMANN_JSON_INCLUDE_DIR = "E:\nlohmann_json\install\include"
 
 # 源文件目录
 SRC_DIR = src/cpp

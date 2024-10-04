@@ -36,7 +36,7 @@ include makefile.os
 CC= g++
 # 编译器标志
 
-CFLAGS = -MMD -MP -c -I$(H_DIR) -I$(CV_INCLUDE_DIR) -L$(CV_LIB_DIR) -l$(CV_LIB_FILE) -Wall -O2 
+CFLAGS = -MMD -MP -c -I$(H_DIR) -I$(CV_INCLUDE_DIR) -L$(CV_LIB_DIR) -l$(CV_LIB_FILE) -I$(NLOHMANN_JSON_INCLUDE_DIR) -Wall -O2 
 LFLAGE = -Wall -L$(CV_LIB_DIR) -l$(CV_LIB_FILE)
 
 # 可执行文件名称

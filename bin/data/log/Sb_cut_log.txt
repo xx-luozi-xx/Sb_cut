@@ -1,0 +1,55 @@
+Timestamp: 2024-10-03 12:51:16
+Input file: ./data/in/cr2.png
+Ship count: 584
+Time used: 5056.94 ms
+-
+Timestamp: 2024-10-03 13:02:02
+Input file: ./data/in/cr2.png
+Ship count: 584
+Time used: 8200.67 ms
+-
+Timestamp: 2024-10-03 13:02:29
+Input file: ./data/in/cr2.png
+Ship count: 584
+Time used: 7675.44 ms
+-
+Timestamp: 2024-10-03 13:11:39
+Input file: ./data/in/cr1.png
+Ship count: 614
+Time used: 5490.45 ms
+-
+Timestamp: 2024-10-03 13:13:29
+Input file: ./data/in/cr1.png
+Ship count: 614
+Time used: 3747.09 ms
+-
+Timestamp: 2024-10-04 12:41:59
+Input file: ./data/in/cr1.png
+Ship count: 614
+Time used: 4144.18 ms
+-
+Timestamp: 2024-10-04 12:45:29
+Input file: ./data/in/cr1.png
+Ship count: 614
+Time used: 6193.44 ms
+-
+Timestamp: 2024-10-04 12:46:29
+Input file: ./data/in/cr1.png
+Ship count: 614
+Time used: 6786.57 ms
+-
+Timestamp: 2024-10-04 12:46:42
+Input file: ./data/in/cr1.png
+Ship count: 614
+Time used: 6538.98 ms
+-
+Timestamp: 2024-10-04 13:43:16
+Input file: ./data/in/cr1.png
+Ship count: 614
+Time used: 4764.95 ms
+-
+Timestamp: 2024-10-04 13:45:18
+Input file: ./data/in/cr2.png
+Ship count: 584
+Time used: 6926.77 ms
+-

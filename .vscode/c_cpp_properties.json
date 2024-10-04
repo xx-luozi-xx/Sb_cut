@@ -5,7 +5,8 @@
             "includePath": [
                 "${workspaceFolder}/**",
                 "E:\\opencv_for_MinGW\\install\\include",
-                "${workspaceFolder}/src/h"
+                "${workspaceFolder}/src/h",
+                "E:\\nlohmann_json\\install\\include"
             ],
             "defines": [
                 "_DEBUG",
